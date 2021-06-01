@@ -4,6 +4,7 @@ REST API is developed with Node.js and Express.js.
 
 ### 1. `git clone` - Clone the project
 * `git clone https://github.com/rukshan99/api-ICAF`
+* Add the `.env` file inside the root folder with `MONGO_DB_PASSWORD`.
 ### 2. `npm install` - Install the required packages
 
 ### 3. `npm start` - Run the server in development mode
