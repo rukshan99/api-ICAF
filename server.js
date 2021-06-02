@@ -9,9 +9,10 @@ require('dotenv').config({path: __dirname + '/.env'})
 /* import *
   *  routes *
     *    here */
+const UserRoutes = require('./routes/user-routes');
 
 const MONGO_DB_PASSWORD = process.env['MONGO_DB_PASSWORD'];
-const connectionString = `mongodb+srv://Admin:${MONGO_DB_PASSWORD}@icaf-cluster.pahle.mongodb.net/myFirstDatabase?retryWrites=true&w=majority`;
+const connectionString = `mongodb+srv://Admin:${MONGO_DB_PASSWORD}@icaf-cluster.pahle.mongodb.net/icafDB?retryWrites=true&w=majority`;
 
 app = express(),
 port = process.env.PORT || 4000;
@@ -25,6 +26,7 @@ app.use(bodyParser.urlencoded({ limit: '50mb', extended: true }));
 /* add *
   *  routes *
     *    here */
+app.use('/', UserRoutes);
 
 mongoose
 .connect(connectionString)
