@@ -1,10 +1,34 @@
 const { validationResult } = require('express-validator');
 const mongoose = require('mongoose');
+const jwt = require('jsonwebtoken');
 const { uuid } = require('uuidv4');
 
 const HttpError = require('../models/http-error');
 const User = require('../schemas/user-schema');
 const Payment = require('../schemas/payment-schema');
+const Role = require('../_helpers/role');
+const config = require('../config.json');
+
+const authenticate = async ({ email, password }) => {
+    let user = null;
+    try{
+        user = await User.findOne({ email: email, password: password});
+      } catch(err) {
+        const error = new HttpError(
+          'Something went wrong, could not find user.',
+          500
+        );
+        return next(error);
+      }
+    if (user) {
+        const token = jwt.sign({ sub: user.id, role: user.role }, config.secret);
+        const { password, ...userWithoutPassword } = user;
+        return {
+            ...userWithoutPassword,
+            token
+        };
+    }
+}
 
 const saveUser = async (req, res, next) => {
     console.log('Adding the user');
@@ -81,4 +105,5 @@ const saveUser = async (req, res, next) => {
     res.status(201).json({ User: saveUser });
 };
 
+exports.authenticate = authenticate;
 exports.saveUser = saveUser;

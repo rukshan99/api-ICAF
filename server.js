@@ -3,6 +3,7 @@ const cors = require('cors');
 const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
 
+const errorHandler = require('./_helpers/error-handler');
 
 require('dotenv').config({path: __dirname + '/.env'})
 
@@ -23,10 +24,15 @@ app.use(bodyParser.json({limit: '50mb'}));
 
 app.use(bodyParser.urlencoded({ limit: '50mb', extended: true }));
 
+/* global *
+  *  error *
+    *    handler */
+app.use(errorHandler);
+
 /* add *
   *  routes *
     *    here */
-app.use('/', UserRoutes);
+app.use('/api/v1/users/', UserRoutes);
 
 mongoose
 .connect(connectionString)
