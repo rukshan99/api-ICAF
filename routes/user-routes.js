@@ -15,6 +15,10 @@ const auth = (req, res, next) => {
 router.post('/auth', [], auth);
 router.post('/signup', [], saveUser);
 router.post('/pay', [], savePayment);
+router.get('/downloads/template-research-paper', [],(req,res) => res.download('../docs/template-research-paper.docx'));
+router.get('/downloads/template-workshop-proposal', [],(req,res) => res.download('../docs/template-workshop-proposal.doc'));
+router.get('/downloads/sample-workshop-proposal', [],(req,res) => res.download('../docs/sample-research-paper.pdf'));
+router.get('/downloads/sample-research-paper', [],(req,res) => res.download('../docs/sample-workshop-proposal.pdf'));
 
 //Below routes are for authorization testing purposes only.
 router.get('/admin', authorize(Role.Admin), () => "message: Admin authorized."); //admin only route sample
