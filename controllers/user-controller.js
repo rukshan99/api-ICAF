@@ -111,5 +111,59 @@ const saveUser = async (req, res, next) => {
     res.status(201).json({ User: saveUser });
 };
 
+const savePayment = async (req, res, next) => {
+
+  const { userid, paymentForm } = req.body;
+  let existingUser = null;
+  try {
+    existingUser = await User.findOne({ _id: userid});
+  } catch(err) {
+    const error = new HttpError(
+      'Something went wrong, could not save details.',
+      500
+    );
+    return next(error);
+  }
+  if(existingUser) {
+    const newPayment = new Payment({
+      payment_id: uuid(),
+      amount: paymentForm.amount,
+      paymentDate: new Date(),
+      cardDetails: {
+          cardNo: paymentForm.cardNo,
+          expDate: paymentForm.expDate,
+          cvv: paymentForm.cvv
+      },
+      userid
+    })
+  
+    try {
+      const session = await mongoose.startSession();
+      session.startTransaction();
+      await newPayment.save({ session: session });
+      await User.updateOne({_id: userid}, { $push: { payments: newPayment._id } },(err, res) => {});
+    } catch (err) {
+      const error = new HttpError(
+          'Error occured while saving details. Please try again.',
+          500
+      );
+      return next(error);
+    }
+    let updatedUser = null;
+    try {
+      updatedUser = await User.findOne({ _id: userid});
+    } catch(err) {
+      const error = new HttpError(
+        'Something went wrong..',
+        500
+    );
+      return next(error);
+    }
+    res.status(201).json({ "user": updatedUser });
+  }
+
+}
+
 exports.authenticate = authenticate;
 exports.saveUser = saveUser;
+exports.savePayment = savePayment;
