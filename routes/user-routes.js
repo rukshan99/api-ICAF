@@ -4,7 +4,7 @@ const router = express.Router();
 const authorize = require('../_helpers/authorize')
 const Role = require('../_helpers/role');
 
-const { saveUser, authenticate } = require('../controllers/user-controller');
+const { saveUser, authenticate, savePayment } = require('../controllers/user-controller');
 
 const auth = (req, res, next) => {
     authenticate(req.body)
@@ -14,6 +14,7 @@ const auth = (req, res, next) => {
 
 router.post('/auth', [], auth);
 router.post('/signup', [], saveUser);
+router.post('/pay', [], savePayment);
 
 //Below routes are for authorization testing purposes only.
 router.get('/admin', authorize(Role.Admin), () => "message: Admin authorized."); //admin only route sample
