@@ -142,6 +142,7 @@ const savePayment = async (req, res, next) => {
       session.startTransaction();
       await newPayment.save({ session: session });
       await User.updateOne({_id: userid}, { $push: { payments: newPayment._id } },(err, res) => {});
+      await session.commitTransaction();
     } catch (err) {
       const error = new HttpError(
           'Error occured while saving details. Please try again.',
