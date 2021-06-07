@@ -1,0 +1,25 @@
+.authentication__header {
+    color: white;
+    text-align: center;
+  }
+  
+  .authentication {
+    width: 90%;
+    max-width: 25rem;
+    margin: 7rem auto;
+    text-align: center;
+  }
+  
+  .authentication form {
+    margin-bottom: 1rem;
+  }
+
+  .dropbtn {
+    background-color: #c1c1c19d;
+    color: white;
+    padding: 16px;
+    font-size: 16px;
+    cursor: pointer;
+  }
+  
+  

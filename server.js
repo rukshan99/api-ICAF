@@ -2,6 +2,7 @@ var express = require('express');
 const cors = require('cors');
 const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
+const path = require('path');
 
 const errorHandler = require('./_helpers/error-handler');
 
@@ -33,6 +34,13 @@ app.use(errorHandler);
   *  routes *
     *    here */
 app.use('/api/v1/users/', UserRoutes);
+
+if (process.env.NODE_ENV === 'production') {
+  app.use(express.static(path.join(__dirname, './client/build')));
+  app.get('*', function(req, res) {
+    res.sendFile(path.join(__dirname, './client/build', 'index.html'));
+  });
+}
 
 mongoose
 .connect(connectionString)
