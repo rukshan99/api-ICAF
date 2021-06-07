@@ -10,6 +10,7 @@ require('dotenv').config({path: __dirname + '/.env'})
   *  routes *
     *    here */
 const UserRoutes = require('./routes/user-routes');
+const AdminRoutes = require('./routes/admin-router');
 
 const MONGO_DB_PASSWORD = process.env['MONGO_DB_PASSWORD'];
 const connectionString = `mongodb+srv://Admin:${MONGO_DB_PASSWORD}@icaf-cluster.pahle.mongodb.net/icafDB?retryWrites=true&w=majority`;
@@ -27,6 +28,7 @@ app.use(bodyParser.urlencoded({ limit: '50mb', extended: true }));
   *  routes *
     *    here */
 app.use('/', UserRoutes);
+app.use('/admin', AdminRoutes);
 
 mongoose
 .connect(connectionString)

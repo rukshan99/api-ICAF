@@ -1,35 +1,38 @@
 const Admin = require('../schemas/user-schema');
 
 const countRole = async (req, res) => {
-    if(req.params && req.params.id){
-        const calRole = await (await Admin.findById(req.params.id)).populate('User', 'role')
+    
+        let userList = null;
+        try{
+            userList = await Admin.find({}, function(err, result) {
+                if (err) {
+                  console.log(err);
+                } else {
+                  
+                }
+              });
+        } catch(err) {
+            return err;
+        }
+        
         let totalroleAttendee = 0;
         let totalroleResearcher = 0;
         let totalroleWorkshopPresenter = 0;
 
-        if(calRole.User.length > 0 && calRole.User.role === 'Attendee'){
-            calRole.User.map((user) => {
-                totalroleAttendee = totalroleAttendee ++;
-            });
-        }
+        userList.map(user => {
+            if(user.role === 'Attendee') totalroleAttendee++;
+            else if(user.role === 'Researcher') totalroleResearcher++;
+            else if(user.role === 'Workshop Presenter') totalroleWorkshopPresenter++;
+        });
+        
+        
 
-        else if (calRole.User.length > 0 && calRole.User.role === 'Researcher'){
-            calRole.User.map((user) => {
-                totalroleResearcher = totalroleResearcher ++;
-            });
-        }
-
-        else if (calRole.User.length > 0 && calRole.User.role === 'Workshop Presenter'){
-            calRole.User.map((user) => {
-                totalroleWorkshopPresenter = totalroleWorkshopPresenter ++;
-            });
-        }
-
-
-        res.status(200).send({ totalroleAttendee: totalroleAttendee });
-        res.status(200).send({ totalroleResearcher: totalroleResearcher });
-        res.status(200).send({ totalroleWorkshopPresenter: totalroleWorkshopPresenter });
-    }
+        res.status(200).send({ 
+            totalroleAttendee: totalroleAttendee,
+            totalroleResearcher: totalroleResearcher,
+            totalroleWorkshopPresenter: totalroleWorkshopPresenter
+        });
+  
 }
 
 module.exports = {
