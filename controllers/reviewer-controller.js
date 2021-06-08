@@ -1,17 +1,63 @@
-const { validationResult } = require('express-validator');
-const mongoose = require('mongoose');
-const { uuid } = require('uuidv4');
+const User = require('../schemas/user-schema');
 
 
-const viewAllUsers = async (req, res, next) => {
-   await Course.find({}).populate('User', 'userid name document')
-  .then(data => {
-    res.status(200).send({ data: data });
-  })
-  .catch(error => {
-    res.status(500).send({ error: error.message });
-  });
+const viewAllUsers = async (req, res) => {
+  console.log('getting all users');
+  let userList = null;
+  try{
+    userList = await User.find({},function(err,result){
+      if (err){
 
+        console.log(err);
+
+      }
+      else {
+       
+        res.status(200).send({ userList: userList });
+      }
+
+    });
+
+  }catch(err) {
+      return err;
+  }
+
+ 
+  
 }
+
+
+exports.findAllReseachers = (req, res) => {
+
+  User.find({role : 'reseacher'})
+      .then(data => {
+        if (!data)
+          res.status(404).send({ message: "Not found user with reseacher " });
+        else res.send(data);
+      })
+      .catch(err => {
+        res
+          .status(500)
+          .send({ message: "Error retrieving user details with researcher role" });
+      });
+  
+};
+
+exports.findAllWorkshopPresenters = (req, res) => {
+
+  User.find({role : 'reseacher'})
+      .then(data => {
+        if (!data)
+          res.status(404).send({ message: "Not found user with reseacher " });
+        else res.send(data);
+      })
+      .catch(err => {
+        res
+          .status(500)
+          .send({ message: "Error retrieving user details with researcher role" });
+      });
+  
+};
+
 
 exports.viewAllUsers = viewAllUsers;
