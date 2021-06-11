@@ -12,18 +12,23 @@ afterAll(async () => await dbHandler.closeDatabase());
 
 describe("payment ", () => {
   it("can be created correctly", async () => {
-    expect(async () => await savePayment(testPayment)).not.toThrow();
+    expect(async () => await savePayment(req, res, next)).not.toThrow();
   });
 });
 
-const testPayment = {
-  payment_id: "461eb8cc-3120-4c70-a227-cc3a6a3e7df9",
-  amount: "1000",
-  paymentDate: "Fri Jun 11 2021 23:35:05 GMT+0530 (India Standard Time)",
-  cardDetails: {
-    cardNo: "1234567890",
-    expDate: "03/04/2024",
-    cvv: "123",
+const req = {
+  body: {
+    paymentForm: {
+      cardNo: "1234567890",
+      expDate: "03/04/2024",
+      cvv: "123",
+    },
+    userid: mongoose.Types.ObjectId("55153a8014829a865bbf700d"),
   },
-  userid: mongoose.Types.ObjectId("4e5edf6a0ca62770dfvejd9a"),
+};
+
+const res = "";
+
+const next = (error) => {
+  return error;
 };
