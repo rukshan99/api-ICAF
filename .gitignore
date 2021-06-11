@@ -4,4 +4,3 @@ logs
 npm-debug.log*
 .env* 
 .local
-config.json
