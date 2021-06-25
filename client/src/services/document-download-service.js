@@ -1,4 +1,4 @@
-const DOWNLOADS_API_ENDPOINT = 'http://localhost:4000/api/v1/users/downloads';
+const DOWNLOADS_API_ENDPOINT = '/api/v1/users/downloads';
 
 const DownloadEndpoints = {
     TemplateResearchPaper: `${DOWNLOADS_API_ENDPOINT}/template-research-paper`,

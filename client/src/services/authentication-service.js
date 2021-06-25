@@ -11,7 +11,7 @@ const signin = (email, password) => {
         body: JSON.stringify({ email, password })
     };
 
-    return fetch(`http://localhost:4000/api/v1/users/auth`, requestOptions)
+    return fetch(`/api/v1/users/auth`, requestOptions)
         .then(handleResponse)
         .then(user => {
             // store user details and jwt token in local storage to keep user logged in between page refreshes
