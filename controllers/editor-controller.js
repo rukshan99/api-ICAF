@@ -15,14 +15,17 @@ const addingConference = async (req, res, next) => {
 
  
 
-    const { name, email, contactno, subject, timeslot, status } = req.body;
+    const { name, starttime, endtime, venue,description,status,guest,guest2,guest3 } = req.body;
 
     const addedConference = new conference({
         name,
-        email,
-        contactno,
-        subject,
-        timeslot,
+        description,
+        venue,
+        starttime,
+        endtime,
+        guest,
+        guest2,
+        guest3,
         status
     });
 
