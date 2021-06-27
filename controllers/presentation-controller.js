@@ -1,21 +1,24 @@
 const Presentation = require('../schemas/research-presentation-schema')
-const Conference = require('../schemas/editor-schema') 
+const Conference = require('../schemas/editor-schema')
 
 const createPresentation = async (req, res) => {
     if (req.body) {
-      const presentation = new Presentation(req.body);
-      await presentation.save()
-      .then(data => {
-          console.log(data)
-        Conference.findByIdAndUpdate(data.conference, { $push: { presentation: data._id }}, { new: true, useFindAndModify: false })
-        res.status(200).send({ data: data });
-      })
-      .catch(error => {
-        res.status(500).send({ error: error.message });
-      });
-    }
-  }
+        const { conference } = req.body;
 
-  module.exports = {
+        const presentation = new Presentation(req.body);
+
+        try {
+            const data = await presentation.save();
+            await Conference.updateOne({ _id: conference }, { $addToSet: { presentation: presentation._id } }, (err, res) => { });
+            res.status(200).send({ data: data });
+        } catch (error) {
+            console.error(error)
+        }
+
+
+    }
+}
+
+module.exports = {
     createPresentation
-  };
+};

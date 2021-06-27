@@ -17,8 +17,19 @@ const addingConference = async (req, res, next) => {
         });
       }
     }
+
+    const getAllConference = async (req, res) => {
+        await conference.find({}).populate('presentation', 'topic description presenter')
+        .then(data => {
+          res.status(200).send({ data: data });
+        })
+        .catch(error => {
+          res.status(500).send({ error: error.message });
+        });
+      }
   
     module.exports = {
-        addingConference
+        addingConference,
+        getAllConference
     };
 

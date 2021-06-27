@@ -8,5 +8,6 @@ const WorkshopController = require('../controllers/workshop-controller');
 router.post('/presentation', PresentationController.createPresentation);
 router.post('/conference', EditorController.addingConference);
 router.post('/workshop', WorkshopController.createWorkshop);
+router.get('/', EditorController.getAllConference);
 
 module.exports = router;
