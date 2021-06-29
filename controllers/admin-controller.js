@@ -21,11 +21,28 @@ const countRole = async (req, res) => {
         let totalroleAttendee = 0;
         let totalroleResearcher = 0;
         let totalroleWorkshopPresenter = 0;
+        let totalRejectedResearchPapers = 0;
+        let totalAcceptedResearchPapers = 0;
+        let totalPendingResearchPapers = 0;
 
         userList.map(user => {
-            if(user.role === 'Attendee') totalroleAttendee++;
-            else if(user.role === 'Researcher') totalroleResearcher++;
+            if(user.role === 'Attendee') {
+                totalroleAttendee++;
+            }
+            else if(user.role === 'Researcher') {
+                totalroleResearcher++;
+                if(user.document.docStatus === 'Rejected') {
+                    totalRejectedResearchPapers++;
+                }
+                else if(user.document.docStatus === 'Rejected') {
+                    totalAcceptedResearchPapers++;
+                }
+                else if(user.document.docStatus === 'Rejected') {
+                    totalPendingResearchPapers++;
+                }
+            }
             else if(user.role === 'Workshop Presenter') totalroleWorkshopPresenter++;
+            
         });
         
         
@@ -33,7 +50,10 @@ const countRole = async (req, res) => {
         res.status(200).send({ 
             totalroleAttendee: totalroleAttendee,
             totalroleResearcher: totalroleResearcher,
-            totalroleWorkshopPresenter: totalroleWorkshopPresenter
+            totalroleWorkshopPresenter: totalroleWorkshopPresenter,
+            totalAcceptedResearchPapers: totalAcceptedResearchPapers,
+            totalAcceptedResearchPapers: totalAcceptedResearchPapers,
+            totalPendingResearchPapers: totalPendingResearchPapers
         });
   
 }
