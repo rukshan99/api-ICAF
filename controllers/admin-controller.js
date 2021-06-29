@@ -24,6 +24,9 @@ const countRole = async (req, res) => {
         let totalRejectedResearchPapers = 0;
         let totalAcceptedResearchPapers = 0;
         let totalPendingResearchPapers = 0;
+        let totalAcceptedWorkshop = 0;
+        let totalRejectedWorkshop = 0;
+        let totalPendingWorkshop = 0;
 
         userList.map(user => {
             if(user.role === 'Attendee') {
@@ -34,14 +37,25 @@ const countRole = async (req, res) => {
                 if(user.document.docStatus === 'Rejected') {
                     totalRejectedResearchPapers++;
                 }
-                else if(user.document.docStatus === 'Rejected') {
+                else if(user.document.docStatus === 'Accepted') {
                     totalAcceptedResearchPapers++;
                 }
-                else if(user.document.docStatus === 'Rejected') {
+                else if(user.document.docStatus === 'Pending') {
                     totalPendingResearchPapers++;
                 }
             }
-            else if(user.role === 'Workshop Presenter') totalroleWorkshopPresenter++;
+            else if(user.role === 'Workshop Presenter'){
+                totalroleWorkshopPresenter++;
+                if(user.document.docStatus === 'Rejected') {
+                    totalRejectedWorkshop++;
+                }
+                else if(user.document.docStatus === 'Accepted') {
+                    totalAcceptedWorkshop++;
+                }
+                else if(user.document.docStatus === 'Pending') {
+                    totalPendingWorkshop++;
+                }
+            }
             
         });
         
@@ -52,8 +66,11 @@ const countRole = async (req, res) => {
             totalroleResearcher: totalroleResearcher,
             totalroleWorkshopPresenter: totalroleWorkshopPresenter,
             totalAcceptedResearchPapers: totalAcceptedResearchPapers,
-            totalAcceptedResearchPapers: totalAcceptedResearchPapers,
-            totalPendingResearchPapers: totalPendingResearchPapers
+            totalRejectedResearchPapers: totalRejectedResearchPapers,
+            totalPendingResearchPapers: totalPendingResearchPapers,
+            totalRejectedWorkshop: totalRejectedWorkshop,
+            totalAcceptedWorkshop: totalAcceptedWorkshop,
+            totalPendingWorkshop: totalPendingWorkshop
         });
   
 }
@@ -141,6 +158,31 @@ const updateconference = async (req, res) => {
     });
 }
 
+const getPresentationsForConference = async (req, res) => {
+    if (req.params && req.params.id){
+        await Conference.findById(req.params.id)
+        .populate('presentation', 'topic description starttime endtime presenter')
+        .then(data => {
+            res.status(200).send({ data: data.presentation});
+        })
+        .catch(error => {
+            res.status(500).send({ error: error.message});
+        });
+    }
+}
+
+const getWorkshopForConference = async (req, res) => {
+    if (req.params && req.params.id){
+        await Conference.findById(req.params.id)
+        .populate('workshop', 'topic description starttime endtime presenter')
+        .then(data => {
+            res.status(200).send({ data: data.workshop});
+        })
+        .catch(error => {
+            res.status(500).send({ error: error.message});
+        });
+    }
+}
  
 
 
@@ -151,5 +193,7 @@ module.exports = {
     updateconference,
     getAllWorkshops,
     getAllPresentations,
-    findPublishedConference
+    findPublishedConference,
+    getPresentationsForConference,
+    getWorkshopForConference
 };

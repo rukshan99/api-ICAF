@@ -10,5 +10,7 @@ router.put('/:id', controller.updateconference);
 router.get('/presentation/all', controller.getAllPresentations);
 router.get('/workshop/all', controller.getAllWorkshops);
 router.get('/approved/one', controller.findPublishedConference);
+router.get('/presentations/:id', controller.getPresentationsForConference);
+router.get('/workshops/:id', controller.getWorkshopForConference);
 
 module.exports = router
