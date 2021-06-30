@@ -45,7 +45,6 @@ app.use('/', UserRoutes);
 app.use('/api/v1/reviewer', ReviewerRoutes);
 
 app.use('/editor', EditorRoutes);
-app.use('/reviewer', ReviewerRoutes);
 app.use('/api/v1/admin', AdminRoutes);
 app.use('/api/v1/users/', UserRoutes);
 
