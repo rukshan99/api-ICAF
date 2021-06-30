@@ -29,6 +29,7 @@ app.use(bodyParser.urlencoded({ limit: '50mb', extended: true }));
     *    here */
 app.use('/', UserRoutes);
 app.use('/admin', AdminRoutes);
+//app.use('/api/v1/admin', AdminRoutes);
 
 mongoose
 .connect(connectionString)
