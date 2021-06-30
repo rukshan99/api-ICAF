@@ -32,7 +32,7 @@ app.set('view engine', 'ejs')
   *  routes *
     *    here */
 app.use('/', UserRoutes);
-app.use('/reviewer', ReviewerRoutes);
+app.use('/api/v1/reviewer', ReviewerRoutes);
 
 
 mongoose
