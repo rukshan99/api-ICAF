@@ -42,7 +42,7 @@ app.use(errorHandler);
     *    here */
 
 app.use('/reviewer', ReviewerRoutes);
-app.use('/admin', AdminRoutes);
+app.use('/api/v1/admin', AdminRoutes);
 app.use('/api/v1/users/', UserRoutes);
 
 mongoose
