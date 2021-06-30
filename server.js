@@ -41,10 +41,10 @@ app.use(errorHandler);
 /* add *
   *  routes *
     *    here */
-app.use('/', UserRoutes);
-app.use('/api/v1/reviewer', ReviewerRoutes);
+//app.use('/', UserRoutes);
 
-app.use('/editor', EditorRoutes);
+app.use('/api/v1/reviewer', ReviewerRoutes);
+app.use('/api/v1/editor', EditorRoutes);
 app.use('/api/v1/admin', AdminRoutes);
 app.use('/api/v1/users/', UserRoutes);
 
