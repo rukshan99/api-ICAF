@@ -3,7 +3,7 @@ const cors = require('cors');
 const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
 
-
+const path = require('path') 
 require('dotenv').config({path: __dirname + '/.env'})
 
 /* import *
@@ -23,6 +23,10 @@ app.use(cors());
 app.use(bodyParser.json({limit: '50mb'}));
 
 app.use(bodyParser.urlencoded({ limit: '50mb', extended: true }));
+var nodemailer = require('nodemailer');
+var hbs = require('nodemailer-express-handlebars');
+app.set('views', path.join(__dirname, 'views')) 
+app.set('view engine', 'ejs') 
 
 /* add *
   *  routes *
