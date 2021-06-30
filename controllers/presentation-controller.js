@@ -1,5 +1,5 @@
 const Presentation = require('../schemas/research-presentation-schema')
-const Conference = require('../schemas/editor-schema')
+const Conference = require('../schemas/conference-schema')
 
 const createPresentation = async (req, res) => {
     if (req.body) {
@@ -19,6 +19,17 @@ const createPresentation = async (req, res) => {
     }
 }
 
+const getSinglePresentation = async (req, res) => {
+    await Presentation.findById(req.params.id)
+    .then(data => {
+      res.status(200).send({ data: data });
+    })
+    .catch(error => {
+      res.status(500).send({ error: error.message });
+    });
+  } 
+
 module.exports = {
-    createPresentation
+    createPresentation,
+    getSinglePresentation
 };
