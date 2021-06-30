@@ -1,0 +1,62 @@
+<link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+<script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
+<script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+<!------ Include the above in your HEAD tag ---------->
+
+<html>
+    <head>
+        <style>
+            @import url(https://fonts.googleapis.com/css?family=Open+Sans:300);
+
+.body {
+
+}
+
+.jumbotron-flat {
+  background-color: solid
+  height: 100%;
+  border: 1px solid #4DB8FF;
+  background: white;
+  width: 100%;
+text-align: center;
+overflow: auto;
+}
+
+.paymentAmt {
+    font-size: 80px; 
+}
+
+.centered {
+    text-align: center;
+}
+
+.title {
+ padding-top: 15px;   
+}
+        </style>
+        <title>checkout'</title>
+        <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha256-k2/8zcNbxVIh5mnQ52A0r3a6jAgMGxFJFE2707UxGCk= sha512-ZV9KawG2Legkwp3nAlxLIVFudTauWuBpC10uEafMHYL0Sarrz5A7G79kXh5+5+woxQ5HM559XX2UZjMJ36Wplg==" crossorigin="anonymous">
+    </head>
+    <body style="font-family: 'Open Sans', sans-serif;">
+        <div class="container">
+        <div class="centered title"><h1>Welcome to  checkout.</h1></div>
+     </div>
+     <div class="alert alert-info">&nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp Please choose your method of payment and hit continue. You will then be sent down to pay using your selected payment option.</div>
+     <br>
+      
+<form action="payment" method="POST"> 
+    <script
+        src="//checkout.stripe.com/v2/checkout.js"
+        class="stripe-button"
+        data-key="<%= key %>" 
+        data-amount="" 
+        data-currency="usd" 
+        data-name="Stripe Payment Gateway" 
+        data-description="" 
+        data-locale="auto" > 
+        </script> 
+    </form> 
+    <br>
+    <form action="paywithcash" method="POST" class="btn-group-vertical btn-block"> 
+        <button type="submit" class="btn btn-default"> Pay WIth Cash</button>
+        </form> 
