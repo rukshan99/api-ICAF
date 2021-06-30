@@ -31,6 +31,9 @@
     "jsonwebtoken": "^8.5.1",
     "mongoose": "^5.12.12",
     "mongoose-unique-validator": "^2.0.3",
+    "nodemailer": "^6.6.2",
+    "nodemailer-express-handlebars": "^4.0.0",
+    "path": "^0.12.7",
     "uuidv4": "^6.2.8"
   },
   "devDependencies": {
