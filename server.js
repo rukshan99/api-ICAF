@@ -4,6 +4,9 @@ const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
 
 const path = require('path') 
+
+const errorHandler = require('./_helpers/error-handler');
+
 require('dotenv').config({path: __dirname + '/.env'})
 
 /* import *
@@ -11,6 +14,7 @@ require('dotenv').config({path: __dirname + '/.env'})
     *    here */
 const UserRoutes = require('./routes/user-routes');
 const ReviewerRoutes = require('./routes/reviewer-routes');
+const AdminRoutes = require('./routes/admin-router');
 
 const MONGO_DB_PASSWORD = process.env['MONGO_DB_PASSWORD'];
 const connectionString = `mongodb+srv://Admin:${MONGO_DB_PASSWORD}@icaf-cluster.pahle.mongodb.net/icafDB?retryWrites=true&w=majority`;
@@ -28,12 +32,20 @@ var hbs = require('nodemailer-express-handlebars');
 app.set('views', path.join(__dirname, 'views')) 
 app.set('view engine', 'ejs') 
 
+/* global *
+  *  error *
+    *    handler */
+app.use(errorHandler);
+
 /* add *
   *  routes *
     *    here */
 app.use('/', UserRoutes);
 app.use('/api/v1/reviewer', ReviewerRoutes);
 
+app.use('/reviewer', ReviewerRoutes);
+app.use('/admin', AdminRoutes);
+app.use('/api/v1/users/', UserRoutes);
 
 mongoose
 .connect(connectionString)

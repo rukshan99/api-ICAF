@@ -4,8 +4,11 @@
   "description": "REST API for ICAF web client",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "test": "jest --runInBand ./tests",
     "start": "nodemon server.js"
+  },
+  "jest": {
+    "testEnvironment": "node"
   },
   "repository": {
     "type": "git",
@@ -18,11 +21,14 @@
   },
   "homepage": "https://github.com/rukshan99/api-ICAF#readme",
   "dependencies": {
+    "bcryptjs": "^2.4.3",
     "body-parser": "^1.19.0",
     "cors": "^2.8.5",
     "dotenv": "^10.0.0",
     "express": "^4.17.1",
+    "express-jwt": "^6.0.0",
     "express-validator": "^6.11.1",
+    "jsonwebtoken": "^8.5.1",
     "mongoose": "^5.12.12",
     "mongoose-unique-validator": "^2.0.3",
     "nodemailer": "^6.6.2",
@@ -31,6 +37,8 @@
     "uuidv4": "^6.2.8"
   },
   "devDependencies": {
+    "jest": "^27.0.4",
+    "mongodb-memory-server": "^6.9.6",
     "nodemon": "^2.0.7"
   }
 }
