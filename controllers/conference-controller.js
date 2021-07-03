@@ -44,7 +44,7 @@ const getPresentationForConference = async (req, res) => {
     await conference.findById(req.params.id)
       .populate('presentation', 'topic description starttime endtime presenter')
       .then(data => {
-        res.status(200).send({ presentation: data.presentation });
+        res.status(200).send({ data: data.presentation });
       })
       .catch(error => {
         res.status(500).send({ error: error.message });
@@ -57,7 +57,7 @@ const getWorkshopForConference = async (req, res) => {
     await conference.findById(req.params.id)
       .populate('workshop', 'topic description starttime endtime presenter')
       .then(data => {
-        res.status(200).send({ workshop: data.workshop });
+        res.status(200).send({ data: data.workshop });
       })
       .catch(error => {
         res.status(500).send({ error: error.message });
