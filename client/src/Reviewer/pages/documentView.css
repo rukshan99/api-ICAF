@@ -1,0 +1,30 @@
+.document{
+
+    width: 100%;
+    max-width: 75rem;
+    margin: 2rem auto;
+    text-align: center;
+    border: 2px solid grey;
+    outline-style: groove grey;
+    border-radius: 8px;
+
+}
+
+.btnAccept{
+
+    justify-content: space-between;
+    display: flex;
+    width: 25%;
+    margin: 2rem auto;
+    text-align: center;
+    color: grey;
+}
+/* h3{
+    margin: 2rem auto;
+    text-align: justify;
+    margin-left: 40%;
+    font-family: Arial, Helvetica, sans-serif;
+    font-style: normal;
+    font-size: 20px;
+    color: grey;
+} */

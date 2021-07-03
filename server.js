@@ -48,6 +48,13 @@ app.use('/api/v1/editor', EditorRoutes);
 app.use('/api/v1/admin', AdminRoutes);
 app.use('/api/v1/users/', UserRoutes);
 
+if (process.env.NODE_ENV === 'production') {
+  app.use(express.static(path.join(__dirname, './client/build')));
+  app.get('*', (req, res) => {
+    res.sendFile(path.join(__dirname, './client/build', 'index.html'));
+  });
+}
+
 mongoose
 .connect(connectionString)
 .then(() => {
