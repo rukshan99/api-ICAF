@@ -54,9 +54,6 @@
     ]
   },
   "devDependencies": {
-    "enzyme": "^3.11.0",
-    "enzyme-adapter-react-16": "^1.15.6",
-    "enzyme-to-json": "^3.6.2",
     "react-test-renderer": "^17.0.2"
   },
   "proxy": "https://icaf-sliit.herokuapp.com/"
