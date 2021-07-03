@@ -11,9 +11,9 @@ REST API is developed with Node.js and Express.js.
 
 ### Best practices
 * Before starting development, create a branch.
-  * `git checkout -b dev-<developer name>`
+  * `git checkout -b <FTR|ENH|BUG-name>`
 * Stage and commit changes to the local repo.
   * `git add .`
   * `git commit -m "<commit message>"`
 * Push to the new remote branch.
-  * `git push -u origin dev-<developer name>`
+  * `git push -u origin <FTR|ENH|BUG-name>` (for first push to origin)
