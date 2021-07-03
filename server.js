@@ -41,6 +41,8 @@ app.use(errorHandler);
 /* add *
   *  routes *
     *    here */
+app.use('/', UserRoutes);
+app.use('/api/v1/reviewer', ReviewerRoutes);
 
 app.use('/editor', EditorRoutes);
 app.use('/reviewer', ReviewerRoutes);

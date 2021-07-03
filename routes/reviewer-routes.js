@@ -3,11 +3,11 @@ const router = express.Router();
 
 const reviewerController = require('../controllers/reviewer-controller');
 
-// router.get('/getAllUsers', [], reviewerController.viewAllUsers);
-router.get('/getAllResearchers', [], reviewerController.findAllReseachers);
-router.get('/getAllWorkshopPresenters', [], reviewerController.findAllWorkshopPresenters);
-router.get('/:id', [], reviewerController.getUserById);
-router.put('/update/:id', [], reviewerController.updateReasercherDocStatus);
+router.get('/reserchers', [], reviewerController.findAllReseachers);
+router.get('/presenters', [], reviewerController.findAllWorkshopPresenters);
+router.get('/user/:id', [], reviewerController.getUserById);
+router.put('/researcher/update/:id', [], reviewerController.updateReasercherDocStatus);
+router.put('/presenter/update/:id', [], reviewerController.updatePresenterDocStatus);
     
  
 module.exports = router;
