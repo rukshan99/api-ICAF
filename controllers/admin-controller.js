@@ -1,6 +1,6 @@
 const Admin = require('../schemas/user-schema');
-const Conference =require('../schemas/editor-schema')
-const Workshop = require('../schemas/worshop-schema')
+const Conference =require('../schemas/conference-schema')
+const Workshop = require('../schemas/workshop-schema')
 const Presentation = require('../schemas/research-presentation-schema')
 
 const countRole = async (req, res) => {
