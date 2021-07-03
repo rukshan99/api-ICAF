@@ -13,6 +13,7 @@ require('dotenv').config({path: __dirname + '/.env'})
   *  routes *
     *    here */
 const UserRoutes = require('./routes/user-routes');
+const EditorRoutes = require('./routes/editor-routes');
 const ReviewerRoutes = require('./routes/reviewer-routes');
 const AdminRoutes = require('./routes/admin-router');
 
@@ -40,7 +41,10 @@ app.use(errorHandler);
 /* add *
   *  routes *
     *    here */
+app.use('/', UserRoutes);
+app.use('/api/v1/reviewer', ReviewerRoutes);
 
+app.use('/editor', EditorRoutes);
 app.use('/reviewer', ReviewerRoutes);
 app.use('/api/v1/admin', AdminRoutes);
 app.use('/api/v1/users/', UserRoutes);
