@@ -2,6 +2,8 @@
 ### Conference Management Tool
 REST API is developed with Node.js and Express.js.
 
+**Refer the [documentation](http://rukshanjayasekara.me/docs-ICAF) for more information. (Includes the user guide and the developer guide)**
+
 ### 1. `git clone` - Clone the project
 * `git clone https://github.com/rukshan99/api-ICAF`
 * Add the `.env` file inside the root folder with `MONGO_DB_PASSWORD`.
